@@ -1,26 +1,27 @@
-import { useState } from "react";
 import Student from "./Student";
 import { Student as StudentType } from "./types";
 import AddStudentForm from "./AddStudentForm";
 
 type GridProps = {
     students: StudentType[];
+    onAddStudent: ({ name }: { name: string }) => void;
+    onDeleteStudent: (id: string) => void;
 };
 
-export default function Grid(data: GridProps) {
-    const [students, setStudents] = useState<StudentType[]>(data.students ?? []);
-
-    const onAddStudent = (student: { name: string }) => {
-        setStudents((prev) => [...prev, {id: crypto.randomUUID(), ...student}]);
-    };
+export default function Grid({
+    students,
+    onAddStudent,
+    onDeleteStudent,
+}: GridProps) {
     return (
         <section>
             <article className="grid">
-                {students.map((student: { id: string; name: string }) => (
+                {students.map((student) => (
                     <Student
                         key={student.id}
                         name={student.name}
                         id={student.id}
+                        onDelete={onDeleteStudent}
                     />
                 ))}
             </article>
