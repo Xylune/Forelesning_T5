@@ -1,5 +1,6 @@
 {
     "name": "backend",
+    "type": "module",
     "scripts": {
         "dev": "tsx watch src/index.ts",
         "db:setup": "tsx src/db/index.ts"
